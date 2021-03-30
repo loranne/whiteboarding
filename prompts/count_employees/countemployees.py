@@ -37,16 +37,18 @@ class Node(object):
         count = 0 
         
         # continue working see if I can get around the if statements and eliminate them
-        if not self.children:
-            pass
+        # didn't need the if/else statement at all, because count is set to add
+        # len(self.children). if no children, count = 0
+        # if not self.children:
+        #     pass
 
-        else:
-            count += len(self.children)
+        # else:
+        count += len(self.children)
 
-            for child in self.children:
-                inner_count = child.count_employees()
-                count += inner_count
-                
+        for child in self.children:
+            inner_count = child.count_employees()
+            count += inner_count
+            
         return count
 
 henri = Node('Henri')
