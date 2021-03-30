@@ -9,6 +9,8 @@ class Node(object):
         self.name = name
         self.children = children or []
 
+   
+
     def count_employees(self):
         """Return a count of how many employees this person manages.
 
@@ -16,6 +18,36 @@ class Node(object):
         include *everyone* under them, not just people who directly report to
         them.
         """
+
+        # method uses employee node and returns an int representing their reports, and descendants
+        # for employee, check if there are children nodes
+        # children, if they exist, always contained in list
+        # if so, count them. if not return 0
+        # then call the function recursively on child nodes
+        # count_employees("Janet")
+        # finds Nick and Nora, counts 2
+        # checks for children of Nick and Nora
+        # Nick has no children, count stays at 2
+        # Nora has 1 child, count increments + 1
+        # then callt he function on Nora's child node
+        # finds Henri, count increment + 1
+        # checks for children of Henri, there are none
+        # break out of loop, return count
+        
+        count = 0 
+        
+        # continue working see if I can get around the if statements and eliminate them
+        if not self.children:
+            pass
+
+        else:
+            count += len(self.children)
+
+            for child in self.children:
+                inner_count = child.count_employees()
+                count += inner_count
+                
+        return count
 
 henri = Node('Henri')
 nora = Node("Nora", [henri])
@@ -27,12 +59,8 @@ jen = Node("Jen")
 jessica = Node("Jessica", [al, bob, jen])
 jane = Node("Jane", [jessica, janet])
 
-
-
-
-
-
-
+print(jane.count_employees())
+print(janet.count_employees())
 
 ################################################
 ##      TESTING ONLY. NO NEED TO UPDATE.      ##
